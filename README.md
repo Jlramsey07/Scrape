@@ -14,6 +14,5 @@ App has some Bugs so i displayed images to show hot it worked locally
     - express
     - express-handlebars
     - mongoose
-    - cheerio
-    - request
+     - request
 
