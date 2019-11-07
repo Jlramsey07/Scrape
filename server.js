@@ -1,4 +1,4 @@
-// Dependencies
+
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
@@ -9,26 +9,25 @@ var path = require("path");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
-// Scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
+
 mongoose.Promise = Promise;
 
-//Define port
+
 var port = process.env.PORT || 3000
 
-// Initialize Express
+
 var app = express();
 
-// Use morgan and body parser with our app
+
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// Make public a static dir
+
 app.use(express.static("public"));
 
 // Set Handlebars.
@@ -40,7 +39,7 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-// Database configuration with mongoose
+
 mongoose.connect("mongodb://heroku_jmv816f9:5j1nd4taq42hi29bfm5hobeujd@ds133192.mlab.com:33192/heroku_jmv816f9");
 //mongoose.connect("mongodb://localhost/mongoscraper");
 var db = mongoose.connection;
@@ -78,19 +77,19 @@ app.get("/saved", function(req, res) {
   });
 });
 
-// A GET request to scrape the echojs website
+
 app.get("/scrape", function(req, res) {
-  // First, we grab the body of the html with request
-  request("https://www.nytimes.com/", function(error, response, html) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+  
+  request("https://www.washingtonpost.com/", function(error, response, html) {
+    
     var $ = cheerio.load(html);
-    // Now, we grab every h2 within an article tag, and do the following:
+   
     $("article").each(function(i, element) {
 
-      // Save an empty result object
+      
       var result = {};
 
-      // Add the title and summary of every link, and save them as properties of the result object
+      
 
       summary = ""
       if ($(this).find("ul").length) {
@@ -101,10 +100,9 @@ app.get("/scrape", function(req, res) {
 
       result.title = $(this).find("h2").text();
       result.summary = summary;
-      result.link = "https://www.nytimes.com" + $(this).find("a").attr("href");
+      result.link = "https://www.washingtonpost.com" + $(this).find("a").attr("href");
 
-      // Using our Article model, create a new entry
-      // This effectively passes the result object to the entry (and the title and link)
+  
       var entry = new Article(result);
 
       // Now, save that entry to the db
@@ -126,9 +124,9 @@ app.get("/scrape", function(req, res) {
   });
 });
 
-// This will get the articles we scraped from the mongoDB
+
 app.get("/articles", function(req, res) {
-  // Grab every doc in the Articles array
+  
   Article.find({}, function(error, doc) {
     // Log any errors
     if (error) {
@@ -141,7 +139,7 @@ app.get("/articles", function(req, res) {
   });
 });
 
-// Grab an article by it's ObjectId
+
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   Article.findOne({ "_id": req.params.id })
@@ -163,16 +161,16 @@ app.get("/articles/:id", function(req, res) {
 
 // Save an article
 app.post("/articles/save/:id", function(req, res) {
-      // Use the article id to find and update its saved boolean
+      
       Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
       // Execute the above query
       .exec(function(err, doc) {
-        // Log any errors
+        // Log errors
         if (err) {
           console.log(err);
         }
         else {
-          // Or send the document to the browser
+         
           res.send(doc);
         }
       });

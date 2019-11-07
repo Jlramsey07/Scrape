@@ -1,6 +1,7 @@
 body {
-    background-image: url("/assets/images/background.jpg");
-    padding-top: 70px;
+    background-image: url("/assets/images/fake-wapo.");
+    padding-top: 65px;
+    background-color: rgb(46, 13, 13);
 }
 
 .deleteNote {
@@ -14,4 +15,18 @@ body {
 
 #scrape {
     margin: 8px 0px;
+}
+
+.btn btn-primary{ 
+
+    background-color: aquamarine;
+}
+.nav { 
+
+    margin-left: 500px;
+}
+
+.mongo { 
+
+    margin-left: 500px;
 }

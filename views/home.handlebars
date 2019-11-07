@@ -1,12 +1,13 @@
-<!--Homepage-->
+
+
 <div class="container">
-    <div class="col-md-12 jumbotron">
-        <div class="text-center">
-            <h1> New York Times Mongo Scraper</h1>
+    <div class="col-md-6 jumbotron">
+        <div id="mongo" class="text-center" style="margin-left"="500px">
+            <h1>Scraper APP</h1>
         </div>
 
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
         {{#if article}}
             {{#each article}}
             <div class="panel panel-default">
@@ -17,14 +18,14 @@
                     <p> {{this.summary}}</p>
                     <a href={{this.link}} target="_blank">{{this.link}}</a>
                     <br><br>
-                    <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
+                    <button type="button"  data-id={{this._id}}>Save</button>
                 </div>
             </div>
             {{/each}}
         {{else}}
         <div class="panel panel-default">
             <div class="panel-body">
-            <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+            <h4>No new Articles</h4>
             </div>
          </div>
         {{/if}}
