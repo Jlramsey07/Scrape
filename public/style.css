@@ -3,6 +3,8 @@ body {
   height: 1000px;
   background: #e2cdc0;
   min-height: 100vh;
+  background:url("/fake-washington-post-2048x1776.jpg");
+  z-index: 5;
   
   
 }
@@ -35,6 +37,7 @@ nav {
   background: #2b0101;
   height: 3.4rem;
   margin-right: 300px;
+  margin-left: 101px;
   overflow: hidden;
   position: fixed; 
   top: 0; 
