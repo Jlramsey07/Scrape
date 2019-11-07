@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>NewsScrape</title>
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div id="pageContainer">
+        <div id="theName">
+            <header>
+                <h1 class="pageTitle">NewsScrape</h1>
+            </header>
+        </div>
+        <div class="container">
+            <nav>
+                <a href="index.html">
+                    <button id="home">
+                        <i class="fas fa-home"></i></button></a>
+                <a href="/saved"></a>
+                    <button id="saved">
+                        <i class="far fa-newspaper"></i>
+                        Saved
+                    </button></a>
+                <a href="/scrape">
+                    <button id="scrape">
+                        <i class="far fa-plus-square"></i>
+                        Scrape new
+                    </button></a>
+                <a href="/">
+                    <button id="clear">
+                        <i class="far fa-times-circle"></i>
+                        Clear all
+                    </button></a>
+            </nav>
+            <main>
+                    <div id="articles"></div>
+                    <div id="notes"></div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
