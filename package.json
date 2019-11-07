@@ -1,14 +1,14 @@
 {
-  "name": "nytimes-mongo-scraper",
+  "name": "",
   "version": "1.0.0",
-  "description": "Lets users read and comment on NYT stories",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tonyreaves/NYTimes-Mongo-Scraper.git"
+    "url": "git+https://github.com/jlramsey/Scraper"
   },
   "keywords": [
     "New",
@@ -17,12 +17,12 @@
     "news",
     "MondoDB"
   ],
-  "author": "Tony Reaves",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tonyreaves/NYTimes-Mongo-Scraper/issues"
+    "url": "https://github.com/jlramsey/Scraper/issues"
   },
-  "homepage": "https://github.com/tonyreaves/NYTimes-Mongo-Scraper#readme",
+  "homepage": "https://github.com/jlramsey/craper#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
