@@ -1,6 +1,10 @@
 body {
-  background: #f4f4f4;
+  width: 1000px;
+  height: 1000px;
+  background: #e2cdc0;
   min-height: 100vh;
+  
+  
 }
 
 #articles {
@@ -16,9 +20,9 @@ body {
   max-width: 96%;
   margin: 0.5rem;
   min-height: initial;
-  background: rgb(223, 222, 222);
+  background:url("/fake-washington-post-2048x1776.jpg");
   padding: 1rem;
-  border-left: 0.7rem solid #456990;
+  border-left: 0.7rem solid #460505;
 }
 
 .details {
@@ -28,9 +32,9 @@ body {
 }
 
 nav {
-  background: #050505;
+  background: #2b0101;
   height: 3.4rem;
-  margin: 10rem left;
+  margin-right: 300px;
   overflow: hidden;
   position: fixed; 
   top: 0; 
@@ -42,13 +46,14 @@ nav {
   font-size: 3.8rem;
   font-family: "Rubik", sans-serif;
   letter-spacing: -0.15rem;
+ 
 }
 
 #theName {
   left: -8.5rem;
   position: absolute;
   top: 13rem;
-  transform: rotate(270deg);
+  margin-left: 170px;
   border-bottom: solid 0.45rem red;
   display: flex;
   height: 4rem;
@@ -56,7 +61,7 @@ nav {
 }
 
 button {
-  background: #456990;
+  background: #cc7606;
   padding: 0.7rem;
   font-family: "Rubik", sans-serif;
   font-size: 1rem;
@@ -70,12 +75,14 @@ button {
   display: flex;
   flex-flow: column;
   left: 7rem;
+  margin-left: 300px;
+ 
 }
 
 #headline {
   font-size: 1.7rem;
   font-family: "Rubik", sans-serif;
-  color: #456990;
+  color: #5a0d03;
   display: block;
   flex-grow: 1;
 }
@@ -84,7 +91,7 @@ a:-webkit-any-link {
   color: -webkit-link;
   cursor: pointer;
   text-decoration: none;
-  color: #456990;
+  color: #cc7606;
 }
 
 #topDiv {

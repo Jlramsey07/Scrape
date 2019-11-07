@@ -22,15 +22,6 @@ $.getJSON("/articles", function(data) {
   }
 });
 
-// $.getJSON("/articles/saved", function (data) {
-//   // For each one
-//   for (let i = 0; i < data.length; i++) {
-//     // Display the apropos information on the page
-//     $("#articles").empty();
-//     $("#articles").append("<div id='articleDiv'><div id='topDiv'><h1 id='headline' data-id='" + data[i]._id + "'>" + "<a href='" + data[i].link + "'>" + data[i].title + " " + "<i class='fas fa-external-link-alt'></i></a></h1></div><p>" + "<br />" + data[i].details + "</p></div><div id='notes'></div>");
-//   }
-// });
-
 //When you click the home button
 $(document).on("click", "#home", function() {
   // Grab the id associated with the article from the submit button
