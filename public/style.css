@@ -1,11 +1,35 @@
 body {
-  width: 1000px;
-  height: 1000px;
   background: #e2cdc0;
   min-height: 100vh;
-  }
 
   
+}
+
+header {
+  /* border: 1px solid grey; */
+  /* background: white; */
+  margin-bottom: 20px;
+  padding: 20px;
+  /* opacity: 0.75; */
+}
+
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100vw;
+  z-index: -100;
+
+  background:url("/washington-dc.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-position: center center; */
+}
+
+#pageContainer {
+  
+}
 
 #articles {
   left: 5.8rem;
@@ -16,11 +40,48 @@ body {
   min-height: 100%;
 }
 
+.article-box {
+  border: 1px solid grey;
+  background: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  opacity: 0.75;
+}
+
+.fill {
+	background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.fit {
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+div.spacer-1 {
+  padding: 20vh;
+}
+
+.dim {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+  opacity: 0.75;
+}
+
+.pos-rel {
+  position: relative;
+}
+
 #articleDiv {
   max-width: 96%;
   margin: 0.5rem;
   min-height: initial;
-  background:url("/fake-washington-post-2048x1776.jpg");
+  background:url("/Orangeman.jpg");
   padding: 1rem;
   border-left: 0.7rem solid #460505;
 }
@@ -33,34 +94,18 @@ body {
 
 nav {
   background: #2b0101;
-  height: 3.4rem;
-  margin-right: 300px;
-  margin-left: 101px;
-  overflow: hidden;
-  position: fixed; 
-  top: 0; 
-  width: 100%; 
-  z-index: 1;
 }
 
 .pageTitle {
   font-size: 3.8rem;
   font-family: "Rubik", sans-serif;
   letter-spacing: -0.15rem;
- 
 }
 
 #theName {
-  left: -8.5rem;
-  position: absolute;
-  top: 13rem;
-  margin-left: 170px;
   border-bottom: solid 0.45rem rgb(243, 104, 11);
-  display: flex;
   height: 4rem;
-  position: fixed;
-  background-image:url("/fake-washington-post-2048x1776.jpg");
-  
+  background-image:url("/Orangeman.jpg");
 }
 
 button {
@@ -72,16 +117,14 @@ button {
   border-radius: 4%;
   box-shadow: 0.1rem 0.1rem rgb(51, 32, 11);
   margin: 0.3rem 0 0.3rem 0.2rem;
-  
 }
 
-.container {
+/* .container {
   display: flex;
   flex-flow: column;
   left: 7rem;
   margin-left: 300px;
- 
-}
+} */
 
 #headline {
   font-size: 1.7rem;
@@ -104,6 +147,6 @@ a:-webkit-any-link {
 }
 
 footer {
-    display: block;
-    font-family: "Rubik", sans-serif;
+  display: block;
+  font-family: "Rubik", sans-serif;
 }

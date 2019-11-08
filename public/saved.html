@@ -51,28 +51,31 @@
         </div>
 
         <main class="pos-rel">
-                <header>
-                    <h1 class="pageTitle">DC Scraper</h1>
-                </header>
+          <header>
+              <h1 class="pageTitle">DC Scraper</h1>
+              <p ng-show="isSavedPage && articles.length === 0">
+                No Articles Saved
+              </p>
+          </header>
 
-                <div id="pageContainer" class="fill">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="article-box" ng-repeat="article in articles">
-                                    <a title="{{ article.title }}" href="{{ article.link }}"><h3>{{ article.title }}</h3></a>
-                                    <p>{{ article.details }}</p>
-                                    <br />
-                                    <button type="button" class="btn btn-primary" ng-click="saveArticle(article)">Save Article</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div id="pageContainer" class="fill">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="article-box" ng-repeat="article in articles">
+                              <a title="{{ article.title }}" href="{{ article.link }}"><h3>{{ article.title }}</h3></a>
+                              <p>{{ article.details }}</p>
+                              <br />
+                                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(article)">Delete From Saved</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
-                <div id="loading-box" ng-show="isLoading">
-                    <img src="/giphy.gif" id="loading-gif" />
-                </div>
-            </main>
+          <div id="loading-box" ng-show="isLoading">
+              <img src="/giphy.gif" id="loading-gif" />
+          </div>
+      </main>
     </body>
 </html>

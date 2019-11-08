@@ -34,6 +34,7 @@ app.get("/scrape", function(req, res) {
   request("https://www.washingtonpost.com/", function(error, response, html) {
     // Load the html body from request into cheerio
     const $ = cheerio.load(html);
+    const promise_list = [];
     // For each element with a "title" class
     $(".headline").each(function(i, element) {
       // Save the text and href of each link enclosed in the current element
@@ -52,36 +53,48 @@ app.get("/scrape", function(req, res) {
       // If this found element had both a title and a link
       if (title && link && details) {
         // Insert the data in the scrapedData db
-        db.Article.create(
-          {
-            title: title,
-            link: link,
-            details: details,
-            saved: false
-          },
-          function(err, inserted) {
-            if (err) {
-              // Log the error if one is encountered during the query
-              console.log(err);
-            } else {
-              // Otherwise, log the inserted data
-              console.log(inserted);
+        const dbTransaction = new Promise((resolve, reject) => {
+          db.Article.create(
+            {
+              title: title,
+              link: link,
+              details: details,
+              saved: false
+            },
+            function(err, inserted) {
+              if (err) {
+                // Log the error if one is encountered during the query
+                console.log(err);
+                resolve();
+              } else {
+                // Otherwise, log the inserted data
+                console.log(inserted);
+                resolve();
+              }
             }
-          }
-        );
+          );
+        });
+        promise_list.push(dbTransaction);
       }
     });
+
+    Promise.all(promise_list).finally(() => {
+      // Send a "Scrape Complete" message to the browser
+      res.status(200).json({ message: "Scrape complete!" });
+    });
   });
-  // Send a "Scrape Complete" message to the browser
-  res.send("Scrape complete!");
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
+app.get("/articles/:saved", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  const saveParam = req.params.saved;
+  const saved = saveParam === 'true' ? true : false;
+  console.log({ saved });
+  db.Article.find({ saved })
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
+      console.log(dbArticle);
       res.json(dbArticle);
     })
     .catch(function(err) {
@@ -105,8 +118,13 @@ app.post("/save/:id", function(req, res) {
   // Grab the id associated with the article from the submit button
   // var thisId = $(this).attr("data-id");
   const thisId = req.params.id;
-  db.Article.updateOne(thisId, { saved: true });
- 
+  db.Article.updateOne({ _id: thisId }, { saved: true }).then((result) => {
+    console.log(result);
+    res.json({ 
+      message: 'updated successfully',
+      success: true
+    });
+  });
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
@@ -123,6 +141,17 @@ app.get("/articles/:id", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+app.delete("/articles/:id", function(req, res) {
+  const thisId = req.params.id;
+  db.Article.updateOne({ _id: thisId }, { saved: false }).then((result) => {
+    console.log(result);
+    res.json({ 
+      message: 'updated successfully',
+      success: true
+    });
+  });
 });
 
 // Route for saving/updating an Article's associated Note
@@ -147,15 +176,11 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
-app.get("/clear", function(res, req) {
+app.get("/clear", function(req, res) {
   console.log("yffyfytftyfty");
-  db.Article.deleteMany({ saved: false }).then(function() {
-    res.send("All clear!");
+  db.Article.deleteMany({  }).then(function() {
+    res.json({message: "All clear!"});
   });
-  // .catch(function(err) {
-  // If an error occurred, send it to the client
-  //  res.json(err);
-  // });
 });
 
 app.listen(PORT, function() {
