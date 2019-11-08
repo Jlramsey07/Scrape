@@ -93,23 +93,24 @@ div.spacer-1 {
 }
 
 nav {
-  background: #2b0101;
+  background: white;
 }
 
 .pageTitle {
   font-size: 3.8rem;
   font-family: "Rubik", sans-serif;
   letter-spacing: -0.15rem;
+  color: white;
 }
 
 #theName {
-  border-bottom: solid 0.45rem rgb(243, 104, 11);
+  border-bottom: solid 0.45rem rgb(23, 0, 155);
   height: 4rem;
   background-image:url("/Orangeman.jpg");
 }
 
 button {
-  background: #cc7606;
+  background: #062acc;
   padding: 0.7rem;
   font-family: "Rubik", sans-serif;
   font-size: 1rem;
