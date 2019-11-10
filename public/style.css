@@ -13,7 +13,7 @@ header {
   /* opacity: 0.75; */
 }
 
-#backdrop {
+#background {
   position: fixed;
   top: 0;
   left: 0;
@@ -27,9 +27,7 @@ header {
   /* background-position: center center; */
 }
 
-#pageContainer {
-  
-}
+
 
 #articles {
   left: 5.8rem;
@@ -120,12 +118,7 @@ button {
   margin: 0.3rem 0 0.3rem 0.2rem;
 }
 
-/* .container {
-  display: flex;
-  flex-flow: column;
-  left: 7rem;
-  margin-left: 300px;
-} */
+
 
 #headline {
   font-size: 1.7rem;

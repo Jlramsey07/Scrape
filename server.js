@@ -3,24 +3,24 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Scraping tools
+
 var request = require("request");
 var cheerio = require("cheerio");
 
 // Require all models
 var db = require("./models");
 
-// Initialize Express, port at 3000
+// Initialize Express, port at 3009
 var PORT = process.env.PORT || 3009;
 var app = express();
 
-// Middleware
 
-// Morgan logger for logging requests
+
+
 app.use(logger("dev"));
-// Body-parser for handling form submissions
+// Body-parser 
 app.use(bodyParser.urlencoded({ extended: true }));
-// Express.static to serve the public folder as a static directory
+
 app.use(express.static("public"));
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/NewScrape";
@@ -35,10 +35,9 @@ app.get("/scrape", function(req, res) {
     // Load the html body from request into cheerio
     const $ = cheerio.load(html);
     const promise_list = [];
-    // For each element with a "title" class
+  
     $(".headline").each(function(i, element) {
-      // Save the text and href of each link enclosed in the current element
-      // Save an empty result object
+ 
       var result = {};
 
       const title = $(element)
@@ -63,11 +62,11 @@ app.get("/scrape", function(req, res) {
             },
             function(err, inserted) {
               if (err) {
-                // Log the error if one is encountered during the query
+                // Log error 
                 console.log(err);
                 resolve();
               } else {
-                // Otherwise, log the inserted data
+              
                 console.log(inserted);
                 resolve();
               }
@@ -79,7 +78,7 @@ app.get("/scrape", function(req, res) {
     });
 
     Promise.all(promise_list).finally(() => {
-      // Send a "Scrape Complete" message to the browser
+     
       res.status(200).json({ message: "Scrape complete!" });
     });
   });
@@ -87,13 +86,13 @@ app.get("/scrape", function(req, res) {
 
 // Route for getting all Articles from the db
 app.get("/articles/:saved", function(req, res) {
-  // Grab every document in the Articles collection
+ 
   const saveParam = req.params.saved;
   const saved = saveParam === 'true' ? true : false;
   console.log({ saved });
   db.Article.find({ saved })
     .then(function(dbArticle) {
-      // If we were able to successfully find Articles, send them back to the client
+      
       console.log(dbArticle);
       res.json(dbArticle);
     })
@@ -104,19 +103,11 @@ app.get("/articles/:saved", function(req, res) {
 });
 
 app.get("/saved/:id", function(req, res) {
-  //
-  // db.Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
-  //   var hbsObject = {
-  //     article: articles
-  //   };
-  //   res.render("saved", hbsObject);
-  //   console.log("saved")
-  // });
+
 });
 
 app.post("/save/:id", function(req, res) {
-  // Grab the id associated with the article from the submit button
-  // var thisId = $(this).attr("data-id");
+
   const thisId = req.params.id;
   db.Article.updateOne({ _id: thisId }, { saved: true }).then((result) => {
     console.log(result);
@@ -127,18 +118,18 @@ app.post("/save/:id", function(req, res) {
   });
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
+
 app.get("/articles/:id", function(req, res) {
-  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
-      // If we were able to successfully find an Article with the given id, send it back to the client
+     
       res.json(dbArticle);
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
+
       res.json(err);
     });
 });
@@ -154,9 +145,9 @@ app.delete("/articles/:id", function(req, res) {
   });
 });
 
-// Route for saving/updating an Article's associated Note
+
 app.post("/articles/:id", function(req, res) {
-  // Create a new note and pass the req.body to the entry
+
   db.Note.create(req.body)
     .then(function(dbNote) {
 
@@ -167,11 +158,11 @@ app.post("/articles/:id", function(req, res) {
       );
     })
     .then(function(dbArticle) {
-      // If we were able to successfully update an Article, send it back to the client
+   
       res.json(dbArticle);
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
+   
       res.json(err);
     });
 });
